@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse
+from django.shortcuts import render
 
 from .models import Student
 from .forms import StudentForm
@@ -28,11 +28,11 @@ def index(request):
             student.phone = cleaned_data['phone']
             student.save()
             return HttpResponseRedirect(reverse('index'))
-        else:
-            form = StudentForm()
+    else:
+        form = StudentForm()
 
-        context = {
-            'students': students,
-            'form': form,
-        }
-        return render(request, 'index.html', context=context)
+    context = {
+        'students': students,
+        'form': form,
+    }
+    return render(request, 'index.html', context=context)

@@ -16,8 +16,22 @@ from .models import Student
 #     sns = forms.CharField(label='SNS', max_length=128)
 #     phone = forms.CharField(label='电话', max_length=128)
 
-class StudentForm(forms.Form):
-    class Mate:
+class StudentForm(forms.ModelForm):
+    def clean_phone(self):
+        """验证数字"""
+        cleaned_data = self.cleaned_data['phone']
+        if not cleaned_data.isdigit():
+            raise forms.ValidationError('必须是数字！')
+        return int(cleaned_data)
+
+    def clean_sns(self):
+        """验证数字"""
+        cleaned_data = self.cleaned_data['sns']
+        try: return int(cleaned_data)
+        except ValueError:
+            raise forms.ValidationError('必须填写数字！')
+
+    class Meta:
         model = Student
         fields = (
             'name', 'sex', 'profession', 'email', 'sns', 'phone'
