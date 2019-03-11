@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学员管理系统 - Hython</title>
+</head>
+<body>
+    <a href="/admin/">管理</a>
+    <ul>
+    <!--Hello {{ words }}!-->
+    {% for student in students %}
+        <!--<li>{{ student }} - {{ student.status }}</li>-->
+        <li>{{ student.name }} 的状态是 ： {{ student.get_status_display }}</li>
+    {% endfor %}
+    </ul>
+    <hr/>
+    <form action="/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="提交" />
+    </form>
+</body>
+</html>
